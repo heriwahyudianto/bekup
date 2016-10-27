@@ -1,11 +1,12 @@
 <div class="container">
-<h2>Tambah Pegawai</h2>
+<h2>Ubah Pegawai</h2>
 <?php if (!empty(validation_errors())) { ?>
 	<div class="alert alert-danger" role="alert">
 	  <strong><?php echo validation_errors(); ?></strong>
 	</div><?php 
 } ?>
-<?php echo form_open_multipart('pegawai/add'); ?>
+<?php echo form_open_multipart('pegawai/upd');
+echo form_hidden('id_pegawai', $pegawai['id_pegawai']); ?>
 <div class="form-group row">
   <label for="example-text-input" class="col-xs-2 col-form-label">Nama</label>
   <div class="col-xs-10"><?php 
@@ -16,7 +17,8 @@
         'size'          => '50',
         'class'			=> 'form-control',
         'type'			=> 'text',
-        'autofocus'		=> 'autofocus'
+        'autofocus'		=> 'autofocus',
+        'value'			=> $pegawai['nama']
 	]); ?>
   </div>
 </div>
@@ -29,7 +31,7 @@
 		        'name'          => 'kelamin',
 		        'id'            => 'pria',
 		        'value'         => '1',
-		        'checked'       => TRUE,
+		        'checked'       =>  ($pegawai['kelamin'] == 1) ? TRUE : FALSE,
 		        'class'         => 'form-check-input'
 			]); ?> Pria
 	      </label>
@@ -39,9 +41,9 @@
 	        <?php 
 	      	echo form_radio([
 		        'name'          => 'kelamin',
-		        'id'            => 'pria',
+		        'id'            => 'wanita',
 		        'value'         => '2',
-		        'checked'       => FALSE,
+		        'checked'       =>  ($pegawai['kelamin'] == 2) ? TRUE : FALSE,
 		        'class'         => 'form-check-input'
 			]); ?> Wanita
 	      </label>
@@ -58,7 +60,8 @@
         'size'          => '50',
         'class'			=> 'form-control',
         'type'			=> 'tel',
-        'placeholder'	=> '(+country) local - number'
+        'placeholder'	=> '(+country) local - number',
+        'value'			=> $pegawai['no_telp']
 	]); ?>
   </div>
 </div>
@@ -70,7 +73,7 @@
     			$options[$value['id']]=$value['nama'];
     		}
     	}
-		echo form_dropdown('kota', $options, '' , ['class' => 'form-control', 'id' => 'kota' ]);
+		echo form_dropdown('kota', $options, $pegawai['kota'] , ['class' => 'form-control', 'id' => 'kota' ]);
 	    ?>
   </div>
 </div>
@@ -82,7 +85,7 @@
     			$options[$value['id_posisi']]=$value['nama'];
     		}
     	}
-		echo form_dropdown('id_posisi', $options, '' , ['class' => 'form-control', 'id' => 'posisi' ]);
+		echo form_dropdown('id_posisi', $options, $pegawai['id_posisi'] , ['class' => 'form-control', 'id' => 'posisi' ]);
 	    ?>
   </div>
 </div>
@@ -93,7 +96,7 @@
 		    '1'         => 'Tetap',
 		    '0'           => 'Out Sourcing',
 		];
-		echo form_dropdown('status', $options, '' , ['class' => 'form-control', 'id' => 'status' ]);
+		echo form_dropdown('status', $options, $pegawai['status'] , ['class' => 'form-control', 'id' => 'status' ]);
 	    ?>
   </div>
 </div><?php 

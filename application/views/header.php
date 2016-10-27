@@ -21,8 +21,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <a class="nav-link" href="#">Posisi</a>
     </li>
   </ul>
-  <form class="form-inline pull-xs-right">
-    <input class="form-control" type="text" placeholder="Cari">
-    <button class="btn btn-outline-success" type="submit">Cari</button>
-  </form>
+  <?php echo form_open_multipart('pegawai', ['class' => 'form-inline pull-xs-right']); ?>
+    <input class="form-control" type="text" placeholder="Cari" id="cari" >
+    <button class="btn btn-outline-success" type="button" onclick="cari(document.getElementById('cari').value);">Cari</button>
+  <?php echo form_close(); ?>
 </nav>
